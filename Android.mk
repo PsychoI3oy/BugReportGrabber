@@ -11,11 +11,11 @@ LOCAL_SRC_FILES := $(call all-java-files-under, src)
 #Any aidl files in your application can be added here
 LOCAL_SRC_FILES += 
 
-LOCAL_JAVA_STATIC_LIBRARIES := httpcore httpmime
+LOCAL_JAVA_STATIC_LIBRARIES := httpcore httpmime apachemime httpclient 
 
 # include the prebuilt static library which is mentioned in
 #LOCAL_PREBUILT_STATIC_JAVA_LIBARIES
-LOCAL_STATIC_JAVA_LIBRARIES := httpcore httpmime
+LOCAL_STATIC_JAVA_LIBRARIES := httpcore httpmime apachemime httpclient 
 
 LOCAL_PACKAGE_NAME := BugReportGrabber
 
@@ -28,7 +28,7 @@ include $(CLEAR_VARS)
 
 #include any prebuilt jars you are using in your application which is present in
 #libs folder of your package
-LOCAL_PREBUILT_STATIC_JAVA_LIBRARIES := httpcore:libs/httpcore-4.3.2.jar httpmime:libs/httpmime-4.3.4.jar
+LOCAL_PREBUILT_STATIC_JAVA_LIBRARIES := httpcore:libs/httpcore-4.0.1.jar httpmime:libs/httpmime-4.0.3.jar apachemime:libs/apache-mime4j-0.6.jar httpclient:libs/httpclient-4.0.3.jar
 
 include $(BUILD_MULTI_PREBUILT)
 

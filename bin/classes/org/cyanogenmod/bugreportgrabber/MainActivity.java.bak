@@ -11,9 +11,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
-//import org.apache.http.entity.mime.HttpMultipartMode;
-import org.apache.http.entity.mime.MultipartEntity;
-//import org.apache.http.entity.mime.MultipartEntityBuilder;
+import org.apache.http.entity.mime.*;
 import org.apache.http.entity.mime.content.FileBody;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -261,13 +259,14 @@ public class MainActivity extends Activity {
                     //FileEntity bugreportUploadEntity = new FileEntity(bugreportFile, "text/ascii"); 
                     //httpostUpl.setHeader("Content-Size", Objects.toString(fileSize));
                     Log.d("brg", "File object created");
-                    MultipartEntity bugreportUploadEntity = new MultipartEntity();
-                    Log.d("brg", "entity created");
-                    Log.d("brg", "mode set");
-                    bugreportUploadEntity.addPart("file", new FileBody(bugreportFile));
-                    Log.d("brg", "file added");
-                    httpostUpl.setEntity(bugreportUploadEntity);
-                    Log.d("brg", "entity created and attached ");
+                    MultipartEntityBuilder bugreportUploadEntityB = MultipartEntityBuilder.create();
+                    //Log.d("brg", "entity created");
+                    bugreportUploadEntityB.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
+                    //Log.d("brg", "mode set");
+                    bugreportUploadEntityB.addPart("file", new FileBody(bugreportFile));
+                    //Log.d("brg", "file added");
+                    httpostUpl.setEntity(bugreportUploadEntityB.build());
+                    //Log.d("brg", "entity created and attached ");
                     HttpResponse uplResponse = uplClient.execute(httpostUpl);
                     Log.d("brg", "executed ");
                     HttpEntity entityResponse = uplResponse.getEntity();
@@ -280,7 +279,7 @@ public class MainActivity extends Activity {
                     uhoh.show(getFragmentManager(), "upload failed");
                     
                     //re-enable the button so they can try again
-                  //  submitButton.setEnabled(true);
+                    submitButton.setEnabled(true);
 
                 }
             
@@ -290,7 +289,7 @@ public class MainActivity extends Activity {
                 uhoh.show(getFragmentManager(), "JIRA failed");
                 
                 //re-enable the button so they can try again
-                //submitButton.setEnabled(true);
+                submitButton.setEnabled(true);
                
             }
 //pop toast for file uploaded successfully? 
