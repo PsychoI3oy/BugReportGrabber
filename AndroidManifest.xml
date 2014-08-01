@@ -2,9 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="org.cyanogenmod.bugreportgrabber"
     android:versionCode="1"
-    android:versionName="1.0" 
+    android:versionName="1.0"
     android:sharedUserId="android.uid.shell">
-
     <uses-sdk
         android:minSdkVersion="19"
         android:targetSdkVersion="22" />
@@ -32,10 +31,9 @@
                 <data android:mimeType="application/vnd.android.bugreport"/>
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ResultActivity"
-            android:label="@string/title_activity_result" >
-        </activity>
+        <service 
+        	android:name=".BRGService"
+            android:exported="false"/>  
     </application>
 
 </manifest>
